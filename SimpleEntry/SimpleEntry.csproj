@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{11E29162-658A-47AB-AB7B-DA69A9771F0A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SimpleEntry</RootNamespace>
+    <AssemblyName>SimpleEntry</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>12.0.60409.0</ExpressionBlendVersion>
+    <NuGetPackageImportStamp>6ba079ec</NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>none</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SimpleEntry.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SimpleEntry.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.5\Libraries\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Mvvm">
+      <HintPath>D:\Program Files (x86)\Microsoft Prism\PrismLibrary\Prism.Mvvm\bin\Debug\Microsoft.Practices.Prism.Mvvm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.PubSubEvents">
+      <HintPath>D:\Program Files (x86)\Microsoft Prism\PrismLibrary\Prism.PubSubEvents\bin\Debug\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.SharedInterfaces">
+      <HintPath>D:\Program Files (x86)\Microsoft Prism\PrismLibrary\Prism.Mvvm\bin\Debug\Microsoft.Practices.Prism.SharedInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.98.1\lib\net45\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.5\Libraries\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Converter\BooleanOrConverterForErrorTemplate.cs" />
+    <Compile Include="Converter\BuildFormValidation.cs" />
+    <Compile Include="Converter\IsFinishButtonVisible.cs" />
+    <Compile Include="Converter\IsCheckVisibleConverter.cs" />
+    <Compile Include="Converter\IsMannualEntryVisible.cs" />
+    <Compile Include="Converter\IsQuestionNumberExistConverter.cs" />
+    <Compile Include="Converter\IsValueRageVisibleConverter.cs" />
+    <Compile Include="Converter\PatternIsEnabledConverter.cs" />
+    <Compile Include="Converter\QuestionNumberToStringConverter.cs" />
+    <Compile Include="Converter\QuestionTypeIDToQuestionTypeConverter.cs" />
+    <Compile Include="Converter\QuestionTypeToDataTypeConverter.cs" />
+    <Compile Include="Converter\QuestionTypeToJumpEnabled.cs" />
+    <Compile Include="Converter\QuestionTypeToOptionsConverter.cs" />
+    <Compile Include="Converter\QuestionTypeToRepeatEnabled.cs" />
+    <Compile Include="Converter\QuestionTypeToValueLableConverter.cs" />
+    <Compile Include="Converter\ValueRangeIsEnabledConverter.cs" />
+    <Compile Include="GetRecordNumPubEvent.cs" />
+    <Compile Include="Models\ButtonContentSaveOrUpdate.cs" />
+    <Compile Include="Models\CommandProxy.cs" />
+    <Compile Include="Models\DataType.cs" />
+    <Compile Include="Models\EventAggregatorRepository.cs" />
+    <Compile Include="Models\IsQuestionFieldExist.cs" />
+    <Compile Include="Models\ITab.cs" />
+    <Compile Include="Models\ListBoxSelectedIndex.cs" />
+    <Compile Include="Models\QuestionAnwser.cs" />
+    <Compile Include="Models\QuestionInfo.cs" />
+    <Compile Include="Models\QuestionType.cs" />
+    <Compile Include="Models\Search.cs" />
+    <Compile Include="Models\SearchTextBox.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Services\GetComboBoxList.cs" />
+    <Compile Include="Services\GetFileNameOrFilePath.cs" />
+    <Compile Include="Services\IComboBoxList.cs" />
+    <Compile Include="Services\IDataServices.cs" />
+    <Compile Include="Services\LogWritter.cs" />
+    <Compile Include="Services\SqliteDataServices.cs" />
+    <Compile Include="Services\ValidateDataBase.cs" />
+    <Compile Include="SingleInstanceApp.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="ViewModels\BuildLibraryViewModel.cs" />
+    <Compile Include="ViewModels\DataEntryFormViewModel.cs" />
+    <Compile Include="ViewModels\DataEntryViewModel.cs" />
+    <Compile Include="ViewModels\ExportDataViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MergeLibraryViewModel.cs" />
+    <Compile Include="ViewModels\Windows\AutoWaitCursor.cs" />
+    <Compile Include="ViewModels\Windows\BusyIndicator\Implementation\BusyIndicator.cs" />
+    <Compile Include="ViewModels\Windows\BusyIndicator\Implementation\VisualStates.BusyIndicator.cs" />
+    <Compile Include="ViewModels\Windows\CenterChildHelper.cs" />
+    <Compile Include="ViewModels\Windows\GlowWindow.cs" />
+    <Compile Include="ViewModels\Windows\ProgressRing.cs" />
+    <Compile Include="ViewModels\Windows\RepositionPopupBehavior.cs" />
+    <Compile Include="ViewModels\Windows\DatePickerHelper.cs" />
+    <Compile Include="ViewModels\Windows\DispatcherHelper.cs" />
+    <Compile Include="ViewModels\Windows\ExCommandParameter.cs" />
+    <Compile Include="ViewModels\Windows\ExInvokeCommandAction.cs" />
+    <Compile Include="ViewModels\Windows\MessageBoxPlus.cs" />
+    <Compile Include="ViewModels\Windows\ScrollIntoViewForListBox.cs" />
+    <Compile Include="ViewModels\Windows\TextBoxHelper.cs" />
+    <Compile Include="ViewModels\Windows\WindowSizing.cs" />
+    <Compile Include="Views\AboutUserControl.xaml.cs">
+      <DependentUpon>AboutUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BuildLibraryUserControl.xaml.cs">
+      <DependentUpon>BuildLibraryUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BusyWindow.xaml.cs">
+      <DependentUpon>BusyWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataEntryFormUserControl.xaml.cs">
+      <DependentUpon>DataEntryFormUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataEntryUserControl.xaml.cs">
+      <DependentUpon>DataEntryUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExportDataUserControl.xaml.cs">
+      <DependentUpon>ExportDataUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MergeLibraryUserControl.xaml.cs">
+      <DependentUpon>MergeLibraryUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessageBoxWindow.xaml.cs">
+      <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Config.cs" />
+    <Compile Include="ViewModels\Windows\FullScreenManager.cs" />
+    <Page Include="Resources\ChromeTabControlControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ContentTextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\DatePicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ErrorTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ProgressRing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Splitter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\RadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\BusyIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AboutUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuildLibraryUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BusyWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataEntryFormUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataEntryUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExportDataUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MergeLibraryUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MessageBoxWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\DataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\NormalButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\StatusBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\WindowTitleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Themes\LightTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="MyData.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Readme.rtf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChromeTabs\ChromeTabs.csproj">
+      <Project>{0208352a-d75a-44b1-9c21-aa54d64d24b6}</Project>
+      <Name>ChromeTabs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpssHelper\SpssHelper.csproj">
+      <Project>{e66866bc-44b5-417d-9157-f9e1a576fc7c}</Project>
+      <Name>SpssHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLiteHelper\SQLiteHelper.csproj">
+      <Project>{f91be510-052a-4529-accc-5a3d220f807c}</Project>
+      <Name>SQLiteHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SimpleEntry.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="qrcode_for_SimpleEntry.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.98.1\build\net45\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

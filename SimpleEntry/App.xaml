@@ -1,0 +1,26 @@
+﻿<Application x:Class="SimpleEntry.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\LightTheme.xaml"/>
+                <ResourceDictionary Source="Resources\ContentTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Resources\TextBox.xaml"/>
+                <ResourceDictionary Source="Resources\NormalButton.xaml"/>
+                <ResourceDictionary Source="Resources\ComboBox.xaml"/>
+                <ResourceDictionary Source="Resources\WindowTitleButton.xaml"/>
+                <ResourceDictionary Source="Resources\StatusBar.xaml"/>
+                <ResourceDictionary Source="Resources\ErrorTemplate.xaml"/>
+                <ResourceDictionary Source="Resources\ChromeTabControlControl.xaml"/>
+                <ResourceDictionary Source="Resources\RadioButton.xaml"/>
+                <ResourceDictionary Source="Resources\CheckBox.xaml"/>
+                <ResourceDictionary Source="Resources\ListBox.xaml"/>
+                <ResourceDictionary Source="Resources\DatePicker.xaml"/>
+                <ResourceDictionary Source="Resources\ProgressRing.xaml"/>
+                <ResourceDictionary Source="Resources\BusyIndicator.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

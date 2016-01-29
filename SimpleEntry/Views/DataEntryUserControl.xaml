@@ -1,0 +1,175 @@
+﻿<UserControl x:Class="SimpleEntry.Views.DataEntryUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cvt="clr-namespace:SimpleEntry.Converter"
+             xmlns:local="clr-namespace:SimpleEntry"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:vm_w="clr-namespace:SimpleEntry.ViewModels.Windows"
+             mc:Ignorable="d" 
+             d:DesignHeight="420" d:DesignWidth="700">
+    <UserControl.Resources>
+        <cvt:QuestionNumberToStringConverter x:Key="NumberToStringcvt"/>
+        <cvt:QuestionTypeIDToQuestionTypeConverter x:Key="TypeIDToTypecvt"/>
+        <cvt:IsCheckVisibleConverter x:Key="CheckVisiblecvt"/>
+        <cvt:IsValueRageVisibleConverter x:Key="ValueRangeVisiblecvt"/>
+        <cvt:IsMannualEntryVisible x:Key="MEcvt"/>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="grid" Storyboard.TargetProperty="Opacity"
+                                     Duration="0:0:0.6" From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="0" Margin="0">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2D2D30" Offset="1"/>
+                    <GradientStop Color="#FF398C99" Offset="0.007"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Height="30" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1.2*"/>
+                </Grid.ColumnDefinitions>
+                <DockPanel Grid.Column="0" LastChildFill="True" Margin="20,0,5,0">
+                    <!--<TextBlock Text="问卷编号：" Margin="0" VerticalAlignment="Center" FontSize="15"/>
+                    <TextBox Width="45" Height="21" Margin="0,0,20,0" VerticalAlignment="Center" FontSize="15"/>-->
+                    <TextBlock Margin="0,0,20,0" VerticalAlignment="Center" FontSize="13" Foreground="White"
+                               Text="{Binding QuestionInfo.QuestionNumber, Mode=OneWay, Converter={StaticResource NumberToStringcvt}}"/>
+                    <TextBlock Margin="0,0,20,0" VerticalAlignment="Center" FontSize="13" Foreground="White" 
+                               Text="{Binding QuestionInfo.QuestionTypeID, Mode=OneWay, Converter={StaticResource TypeIDToTypecvt}}" />
+
+                    <TextBlock  VerticalAlignment="Center" FontSize="13" Text="答案：" Foreground="White"/>
+                    <TextBlock VerticalAlignment="Center" FontSize="13" TextTrimming="CharacterEllipsis" Margin="0,0,5,0"
+                               Text="{Binding AnwserString, Mode=TwoWay,ValidatesOnDataErrors=True,ValidatesOnExceptions=True,ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}" 
+                               Validation.ErrorTemplate="{StaticResource ErrorTemplatePopoutWindow}" Foreground="White" Width="70" />
+                    <DockPanel x:Name="dpMannual" LastChildFill="True" Visibility="{Binding QuestionInfo.QuestionTypeID, Converter={StaticResource MEcvt}, IsAsync=True}">
+                        <TextBlock  VerticalAlignment="Center" FontSize="13" Text="手动输入：" Foreground="White"/>
+                        <TextBox x:Name="tbMannual" Height="25" Padding="0,3,0,0" 
+                                 Style="{DynamicResource TextBoxStyle}"
+    						     Validation.ErrorTemplate="{StaticResource ErrorTemplatePopoutWindow}" 
+                                 Text="{Binding MannualAnwser, Mode=TwoWay,ValidatesOnDataErrors=True,ValidatesOnExceptions=True,ValidatesOnNotifyDataErrors=True,UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="KeyDown">
+                                    <vm_w:ExInvokeCommandAction 
+                            Command="{Binding tbMannualKeyDownCommand, IsAsync=True}"  
+                            CommandParameter="{Binding ElementName=tbMannual, IsAsync=True}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="PreviewKeyDown">
+                                    <vm_w:ExInvokeCommandAction 
+                            Command="{Binding tbMannualPreviewKeyDownCommand, IsAsync=True}"  
+                            CommandParameter="{Binding ElementName=tbMannual, IsAsync=True}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </DockPanel>
+                </DockPanel>
+                <Button Grid.Column="1" Height="30" Width="60" Content="清除选择" 
+    					Style="{DynamicResource CustomButtonStyle}" Background="White"
+    					Command="{Binding RestoreAnwserCommand, IsAsync=True}" VerticalAlignment="Center" FontSize="13" Foreground="Black" Padding="1,2,1,1"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0" HorizontalAlignment="Right">
+                    <TextBlock Text="非空" Margin="0,0,20,0" VerticalAlignment="Center" FontSize="13" Foreground="White"
+                               Visibility="{Binding QuestionInfo.IsMustEnter, Mode=OneWay, Converter={StaticResource CheckVisiblecvt}, IsAsync=True}"/>
+                    <TextBlock Text="重复" Margin="0,0,20,0" VerticalAlignment="Center" FontSize="13" Foreground="White"
+                               Visibility="{Binding QuestionInfo.IsRepeat, Mode=OneWay, Converter={StaticResource CheckVisiblecvt}, IsAsync=True}"/>
+                    <Border BorderThickness="0,0,0,1" BorderBrush="#FFCCCCCC" Margin="0,0,20,0" Height="21"
+                            Visibility="{Binding QuestionInfo.IsJump, Mode=OneWay, Converter={StaticResource CheckVisiblecvt}, IsAsync=True}">
+                        <StackPanel Orientation="Horizontal" Height="21">
+                            <TextBlock Text="跳转条件：" VerticalAlignment="Center" FontSize="13" Foreground="White"/>
+                            <TextBlock VerticalAlignment="Center" FontSize="13" Foreground="White" 
+                                       Text="{Binding QuestionInfo.JumpConditions, Mode=OneWay, IsAsync=True}"/>
+                            <Line x:Name="Separator" X1=".5" Y1="3" X2=".5" Y2="20" Margin="5,0" VerticalAlignment="Center" Stroke="#cccccc"/>
+                            <TextBlock Text="跳转到：" VerticalAlignment="Center" FontSize="13" Foreground="White"/>
+                            <TextBlock VerticalAlignment="Center" FontSize="13" Foreground="White" 
+                                       Text="{Binding QuestionInfo.JumpTarget, Mode=OneWay, Converter={StaticResource NumberToStringcvt}, IsAsync=True}"/>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding QuestionInfo.ValueRange, Converter={StaticResource ValueRangeVisiblecvt}, IsAsync=True}">
+                        <TextBlock Text="取值范围：" VerticalAlignment="Center" FontSize="13" Foreground="White"/>
+                        <TextBlock VerticalAlignment="Center" FontSize="13" Foreground="White"
+                                   Text="{Binding QuestionInfo.ValueRange, Mode=OneWay, IsAsync=True}" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" BorderThickness="0,0,0,1" Margin="0" BorderBrush="#FFABADB3">
+            <Grid Margin="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1.2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbQContent" AcceptsReturn="True" VerticalScrollBarVisibility="Disabled" 
+    						TextWrapping="Wrap" FontSize="15" IsReadOnly="True" Padding="10,10,28,10" 
+                         Text="{Binding QuestionInfo.QuestionContent, Mode=OneWay}" Margin="0" BorderThickness="1,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Focusable="False">
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Background" Value="{x:Null}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                                    <Setter Property="Foreground" Value="White"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <GridSplitter Grid.Column="1" Width="1" HorizontalAlignment="Stretch" Focusable="False"/>
+                <ItemsControl Grid.Column="2" ItemsSource="{Binding Controls, IsAsync=True}" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" BorderThickness="0,0,1,0" BorderBrush="#FFABADB3" Focusable="False">
+                    <!--<ItemsControl.BindingGroup>
+                        <BindingGroup>
+                            <BindingGroup.ValidationRules>
+                                <local:FillValidationRule ValidationStep="UpdatedValue"  ValidatesOnTargetUpdated="True" />
+                            </BindingGroup.ValidationRules>
+                        </BindingGroup>
+                    </ItemsControl.BindingGroup>-->
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel x:Name="wrappanel" IsItemsHost="True"/>
+                            <!--<WrapPanel.BindingGroup>
+                                    <BindingGroup>
+                                        <BindingGroup.ValidationRules>
+                                            <local:FillValidationRule ValidationStep="UpdatedValue"  ValidatesOnTargetUpdated="True" />
+                                        </BindingGroup.ValidationRules>
+                                    </BindingGroup>
+                                </WrapPanel.BindingGroup>
+                                <WrapPanel.Style>
+                                    <Style TargetType="WrapPanel">
+                                        <Style.Triggers>
+                                            <Trigger Property="Validation.HasError" Value="true">
+                                                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)[0].ErrorContent}"/>                                            
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </WrapPanel.Style>-->
+                            <!--</WrapPanel>-->
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <!--<ItemsControl.ItemTemplate>
+                        -->
+                    <!--<DataTemplate>
+                        </DataTemplate>-->
+                    <!--
+                    </ItemsControl.ItemTemplate>-->
+                </ItemsControl>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

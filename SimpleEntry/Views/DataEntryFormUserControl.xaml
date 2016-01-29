@@ -1,0 +1,131 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:SimpleEntry.ViewModels"
+             xmlns:vm_w="clr-namespace:SimpleEntry.ViewModels.Windows"
+             xmlns:views="clr-namespace:SimpleEntry.Views"
+             xmlns:Converter="clr-namespace:SimpleEntry.Converter" x:Class="SimpleEntry.Views.DataEntryFormUserControl"
+             xmlns:Core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:md="clr-namespace:SimpleEntry.Models"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="680">
+    <UserControl.Resources>
+        <!--<DataTemplate DataType="{x:Type vm:DataEntryViewModel}">
+            <views:DataEntryUserControl/>
+        </DataTemplate>-->
+        <!--<Converter:IsFinishButtonVisible x:Key="cvtVisible"/>-->
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="commandStackPanel" Storyboard.TargetProperty="Opacity"
+                                     Duration="0:0:0.8" From="0" To="1"/>
+                    <ThicknessAnimation Storyboard.TargetName="commandStackPanel" Storyboard.TargetProperty="Margin"
+                                     Duration="0:0:0.8" From="-15,10,0,10" To="0,10,0,10"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <DockPanel LastChildFill="True">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="0,10"
+                    x:Name="commandStackPanel">
+            <Button x:Name="btnFirst" Height="26" Width="60" Margin="0,0,15,0" Content="|&lt;" 
+        		Style="{DynamicResource CustomButtonStyle}"
+        		Command="{x:Static md:CommandProxy.MoveToFirstRecordCommand}"/>
+            <Button x:Name="btnPrev" Width="60" Margin="0,0,15,0" Content="&lt;" 
+        		Style="{DynamicResource CustomButtonStyle}"
+        		Command="{x:Static md:CommandProxy.MoveToPreviousRecordCommand}"/>
+            <Button x:Name="btnNext" Width="60" Margin="0,0,15,0" Content="&gt;" 
+        		Style="{DynamicResource CustomButtonStyle}"
+        		Command="{x:Static md:CommandProxy.MoveToNextRecordCommand}"/>
+            <Button x:Name="btnLast" Width="60" Margin="0" Content="&gt;|" 
+        		Style="{DynamicResource CustomButtonStyle}"
+        		Command="{x:Static md:CommandProxy.MoveToLastRecordCommand}"/>
+            <TextBox x:Name="tbSearch" MinWidth="60" Margin="15,0,10,0" Padding="0,4,0,0" HorizontalContentAlignment="Right" MaxWidth="60" 
+        		Style="{DynamicResource TextBoxStyle}"
+    			Validation.ErrorTemplate="{StaticResource ErrorTemplatePopoutWindow}" 
+                Text="{Binding SearchTextBox.SearchQuestionNumber, Mode=TwoWay, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}"/>
+            <Button x:Name="btnSearch" Width="60" Margin="0" Content="查询" 
+        		Style="{DynamicResource CustomButtonStyle}"
+        		Command="{x:Static md:CommandProxy.SearchAllRecordCommand}"/>
+            <Button x:Name="btnDelete" Height="26" Width="60" Margin="15,0" Content="删除" 
+        		Style="{DynamicResource CustomButtonStyle}"
+        		Command="{x:Static md:CommandProxy.DeleteAllRecordCommand}"/>
+            <Button x:Name="btnSave" Width="60" Margin="0,0,15,0" Content="保存"
+        		Style="{DynamicResource CustomButtonStyle}"
+                Command="{x:Static md:CommandProxy.SaveAllEntryDataCommand}"/>
+        </StackPanel>
+        <Border DockPanel.Dock="Top" BorderThickness="0,0,0,2" BorderBrush="#FF995709" >
+            <!--</ScrollViewer>-->
+            <!--<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">-->
+            <ListBox x:Name="lbEntry"  VerticalContentAlignment="Stretch" Background="{x:Null}" 
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,5,0,0" 
+                     HorizontalContentAlignment="Stretch" BorderThickness="0" 
+                     BorderBrush="{x:Null}" ScrollViewer.CanContentScroll="False"
+                     ItemsSource="{Binding DataEntryViewModels, IsAsync=True}"
+        		     SelectedIndex="{Binding SelectedIndex, Source={x:Static md:ListBoxSelectedIndex.Instance}, UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{DynamicResource ListBoxStyle}" 
+                     SelectionChanged="lbEntry_SelectionChanged">
+                <i:Interaction.Behaviors>
+                    <vm_w:ScrollIntoViewForListBox/>
+                </i:Interaction.Behaviors>
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <vm_w:ExInvokeCommandAction 
+                            Command="{Binding PreviewMouseLeftButtonDownCommand}"  
+                            CommandParameter="{Binding ElementName=lbEntry}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <!--GotFocus="OnChildGotFocus"-->
+                        <VirtualizingStackPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <views:DataEntryUserControl x:Name="DataEntryUserControl"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <!--<EventSetter Event="UIElement.PreviewGotKeyboardFocus" Handler="SelectCurrentItem"/>-->
+                        <EventSetter Event="UIElement.GotKeyboardFocus" Handler="SelectCurrentItem"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Border x:Name="border" Background="{TemplateBinding Background}">
+                                        <ContentPresenter/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" TargetName="border">
+                                                <Setter.Value>
+                                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#FF778F83" Offset="1"/>
+                                                        <GradientStop Color="#FF526B78"/>
+                                                    </LinearGradientBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <!--E1C888 D4CC95-->
+                                            <Setter Property="BorderThickness" TargetName="border" Value="0"/>
+                                            <Setter Property="BorderBrush" TargetName="border" Value="red"/>
+                                        </Trigger>
+                                        <!--<Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                            <Setter Property="IsSelected" Value="True"/>-->
+                                        <!--
+                                        </Trigger>-->
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </Border>
+    </DockPanel>
+</UserControl>

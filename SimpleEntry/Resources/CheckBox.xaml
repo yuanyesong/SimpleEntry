@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate x:Key="CheckBoxStyle" TargetType="CheckBox">
+        <Grid>
+            <!--选中状态：粗边框-->
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                <!--内部的文字内容绑定了RadioButton的Content属性-->
+                <TextBlock Text="{TemplateBinding ContentControl.Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"/>
+            </Border>
+            <!--三角形用Polygon表示-->
+            <Polygon x:Name="polygon" Margin="1" Points="0,0 1,10 10,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Polygon.Fill>
+                    <SolidColorBrush Color="Transparent"/>
+                </Polygon.Fill>
+            </Polygon>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Margin" TargetName="border" Value="1"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="Red"/>
+                <Setter Property="BorderThickness" TargetName="border" Value="2"/>
+                <Setter Property="Fill" TargetName="polygon" Value="Red"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" TargetName="border" Value="LightBlue"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>
